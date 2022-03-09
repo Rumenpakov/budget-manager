@@ -17,6 +17,9 @@ public class IncomeController {
     public String createIncome(@RequestParam(name = "value") double value, @RequestParam(name = "date") String date, @RequestParam(name = "isRecurring") boolean isRecurring) {
         if (!isRecurring) {
             budgetManager.addIncome(value);
+        } else {
+            RecurringFinance recurringIncome = new RecurringFinance(date, FinanceType.INCOME, value);
+            budgetManager.addRecurringIncome(recurringIncome);
         }
         return "Success";
     }
